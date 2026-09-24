@@ -1,0 +1,18 @@
+{
+  "input_file": "graph.jsonld",
+  "conforms": true,
+  "violation_count": 0,
+  "violations": [],
+  "shape_source": "supplied shapes file (shapes.ttl)",
+  "node_shapes": 4,
+  "property_constraints": 15,
+  "graph": {
+    "triples": 225,
+    "typed_nodes": 26,
+    "classes": {
+      "Concept": 25,
+      "DefinedTerm": 25,
+      "ConceptScheme": 1
+    }
+  }
+}
