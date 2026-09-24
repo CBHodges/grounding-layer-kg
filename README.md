@@ -1,5 +1,7 @@
 # The Grounding Layer: A Concept Graph for Knowledge Graphs in Enterprise AI
 
+[![DOI](https://zenodo.org/badge/1385880123.svg)](https://doi.org/10.5281/zenodo.22945389)
+
 A small, checked knowledge graph of the core terms behind grounded AI: knowledge graphs, ontologies, provenance, RAG and where it falls short, and grounded abstention.
 
 Built and maintained by **Craig Hodges**, founder of [GoalC.ai](https://www.goalc.ai/about.html) (ALC, Inc.).
@@ -56,4 +58,11 @@ A result of `Conforms: True` means the graph passed.
 
 ## Cite it
 
-See `CITATION.cff`, or use the "Cite this repository" button on GitHub.
+Archived on Zenodo with a permanent DOI:
+
+- All versions: [10.5281/zenodo.22945389](https://doi.org/10.5281/zenodo.22945389)
+- This version (v1.0.1): [10.5281/zenodo.22945390](https://doi.org/10.5281/zenodo.22945390)
+
+> Hodges, C. (2026). *The Grounding Layer: A Concept Graph for Knowledge Graphs in Enterprise AI* (v1.0.1). Zenodo. https://doi.org/10.5281/zenodo.22945389
+
+See also `CITATION.cff`, or use the "Cite this repository" button on GitHub.
