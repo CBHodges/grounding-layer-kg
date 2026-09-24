@@ -1,0 +1,101 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix gci:     <https://goalc.ai/kg/grounding-layer/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema:  <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+#################################################################
+# Concept scheme
+#################################################################
+gci:SchemeShape
+    a sh:NodeShape ;
+    sh:targetClass skos:ConceptScheme ;
+    sh:property [
+        sh:path dcterms:title ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path dcterms:license ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ;
+    ] ;
+    sh:property [
+        sh:path skos:hasTopConcept ;
+        sh:minCount 1 ; sh:class skos:Concept ; sh:nodeKind sh:IRI ;
+    ] .
+
+#################################################################
+# Every concept node
+#################################################################
+gci:ConceptShape
+    a sh:NodeShape ;
+    sh:targetClass gci:Concept ;
+
+    sh:nodeKind sh:IRI ;
+    sh:pattern "^https://goalc\\.ai/kg/grounding-layer/concept/" ;
+
+    sh:property [ sh:path rdf:type ; sh:hasValue skos:Concept ] ;
+    sh:property [ sh:path rdf:type ; sh:hasValue schema:DefinedTerm ] ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:name "preferred label" ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path schema:description ;
+        sh:name "definition" ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ;
+        sh:minLength 20 ;
+    ] ;
+
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class skos:ConceptScheme ; sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [ sh:path skos:broader ;  sh:class gci:Concept ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path skos:narrower ; sh:class gci:Concept ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path skos:related ;  sh:class gci:Concept ; sh:nodeKind sh:IRI ] ;
+
+    sh:property [ sh:path gci:contrastsWith ; sh:class gci:Concept ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path gci:implementedBy ; sh:class gci:Concept ; sh:nodeKind sh:IRI ] ;
+
+    sh:property [ sh:path skos:broader ; sh:disjoint skos:narrower ] .
+
+#################################################################
+# gci:contrastsWith must be declared on BOTH concepts (symmetric)
+#################################################################
+gci:ContrastsWithSymmetryShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf gci:contrastsWith ;
+    sh:sparql [
+        sh:message "gci:contrastsWith must be reciprocal - declare it on both concepts." ;
+        sh:select """
+            SELECT $this ?that WHERE {
+              $this <https://goalc.ai/kg/grounding-layer/contrastsWith> ?that .
+              FILTER NOT EXISTS {
+                ?that <https://goalc.ai/kg/grounding-layer/contrastsWith> $this .
+              }
+            }
+        """ ;
+    ] .
+
+#################################################################
+# The four RAG-Limitation children must sit under the parent
+#################################################################
+gci:RagLimitationMemberShape
+    a sh:NodeShape ;
+    sh:targetNode
+        <https://goalc.ai/kg/grounding-layer/concept/multi-hop-query> ,
+        <https://goalc.ai/kg/grounding-layer/concept/aggregate-query> ,
+        <https://goalc.ai/kg/grounding-layer/concept/source-attribution> ,
+        <https://goalc.ai/kg/grounding-layer/concept/grounded-abstention> ;
+    sh:property [
+        sh:path skos:broader ;
+        sh:hasValue <https://goalc.ai/kg/grounding-layer/concept/rag-limitation> ;
+        sh:minCount 1 ;
+    ] .

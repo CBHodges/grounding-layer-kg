@@ -1,0 +1,637 @@
+{
+  "@context": {
+    "@base": "https://goalc.ai/kg/grounding-layer/",
+    "@vocab": "https://goalc.ai/kg/grounding-layer/",
+    "gci": "https://goalc.ai/kg/grounding-layer/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "gci:Concept": {
+      "@id": "https://goalc.ai/kg/grounding-layer/Concept"
+    },
+    "gci:contrastsWith": {
+      "@id": "https://goalc.ai/kg/grounding-layer/contrastsWith",
+      "@type": "@id"
+    },
+    "gci:implementedBy": {
+      "@id": "https://goalc.ai/kg/grounding-layer/implementedBy",
+      "@type": "@id"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "scheme",
+      "@type": "skos:ConceptScheme",
+      "dcterms:title": "The Grounding Layer: A Concept Graph for Knowledge Graphs in Enterprise AI",
+      "dcterms:license": {
+        "@id": "https://creativecommons.org/licenses/by-nc/4.0/"
+      },
+      "dcterms:creator": "ALC, Inc.",
+      "skos:hasTopConcept": [
+        {
+          "@id": "concept/structured-data"
+        },
+        {
+          "@id": "concept/ontology"
+        },
+        {
+          "@id": "concept/grounding"
+        },
+        {
+          "@id": "concept/rag-limitation"
+        },
+        {
+          "@id": "concept/decision-intelligence"
+        },
+        {
+          "@id": "concept/data-governance"
+        }
+      ]
+    },
+    {
+      "@id": "concept/knowledge-graph",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Knowledge Graph",
+      "schema:description": "A network of entities and the relationships between them, stored as subject-predicate-object triples, so a system can query an exact fact and follow a connection instead of guessing from similar-looking text.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/structured-data"
+        }
+      ],
+      "skos:related": [
+        {
+          "@id": "concept/ontology"
+        },
+        {
+          "@id": "concept/entity-resolution"
+        },
+        {
+          "@id": "concept/triple"
+        },
+        {
+          "@id": "concept/provenance"
+        }
+      ],
+      "gci:contrastsWith": {
+        "@id": "concept/rag"
+      }
+    },
+    {
+      "@id": "concept/ontology",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Ontology",
+      "schema:description": "The schema for a knowledge graph: the fixed set of entity types, relationship types, and rules governing what can be asserted and what it means.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:narrower": [
+        {
+          "@id": "concept/taxonomy"
+        }
+      ],
+      "skos:related": [
+        {
+          "@id": "concept/knowledge-graph"
+        }
+      ]
+    },
+    {
+      "@id": "concept/taxonomy",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Taxonomy",
+      "schema:description": "A hierarchical ontology limited to broader and narrower category relationships, without the richer relationship types a full ontology supports.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/ontology"
+        }
+      ]
+    },
+    {
+      "@id": "concept/entity-resolution",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Entity Resolution",
+      "schema:description": "Matching multiple references to one real-world thing — different names, IDs, or spellings — to a single canonical node, so a fact recorded under any of them resolves the same way.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/knowledge-graph"
+        },
+        {
+          "@id": "concept/canonical-identifier"
+        }
+      ]
+    },
+    {
+      "@id": "concept/canonical-identifier",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Canonical Identifier",
+      "schema:description": "The single stable URI assigned to an entity so every system referencing it points to the same node instead of creating a duplicate under a different name.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/entity-resolution"
+        },
+        {
+          "@id": "concept/knowledge-graph"
+        }
+      ]
+    },
+    {
+      "@id": "concept/triple",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Triple",
+      "schema:description": "The atomic unit of a knowledge graph: one subject-predicate-object statement, such as Contract-4471 auto-renews true.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/knowledge-graph"
+        },
+        {
+          "@id": "concept/provenance"
+        }
+      ]
+    },
+    {
+      "@id": "concept/provenance",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Provenance",
+      "schema:description": "The source, timestamp, and confidence recorded against a specific fact, so an answer can be traced back to where it came from instead of being presented as unattributed truth.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/triple"
+        },
+        {
+          "@id": "concept/source-attribution"
+        },
+        {
+          "@id": "concept/data-lineage"
+        },
+        {
+          "@id": "concept/data-governance"
+        }
+      ]
+    },
+    {
+      "@id": "concept/grounding",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Grounding",
+      "schema:description": "Constraining an AI system's output to facts it can point to a source for, instead of letting it answer from what the model memorized during training.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:narrower": [
+        {
+          "@id": "concept/grounding-layer"
+        },
+        {
+          "@id": "concept/rag"
+        }
+      ],
+      "skos:related": [
+        {
+          "@id": "concept/hallucination"
+        }
+      ]
+    },
+    {
+      "@id": "concept/grounding-layer",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Grounding Layer",
+      "schema:description": "The infrastructure sitting between a language model and its data sources that supplies it sourced facts at query time, rather than raw text to interpret.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/grounding"
+        }
+      ],
+      "gci:implementedBy": {
+        "@id": "concept/knowledge-graph"
+      }
+    },
+    {
+      "@id": "concept/rag",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Retrieval-Augmented Generation",
+      "schema:description": "Retrieving the passages of text most similar to a query and inserting them into a model's prompt, so it answers from retrieved text rather than memory alone.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/grounding"
+        }
+      ],
+      "skos:related": [
+        {
+          "@id": "concept/vector-embedding"
+        },
+        {
+          "@id": "concept/semantic-search"
+        },
+        {
+          "@id": "concept/context-window"
+        }
+      ],
+      "gci:contrastsWith": {
+        "@id": "concept/knowledge-graph"
+      }
+    },
+    {
+      "@id": "concept/vector-embedding",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Vector Embedding",
+      "schema:description": "A numeric representation of text positioned so that passages with similar meaning sit close together, enabling similarity comparison instead of exact keyword matching.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/rag"
+        },
+        {
+          "@id": "concept/semantic-search"
+        }
+      ]
+    },
+    {
+      "@id": "concept/semantic-search",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Semantic Search",
+      "schema:description": "Retrieval ranked by meaning rather than exact keyword overlap, computed by comparing vector embeddings.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/vector-embedding"
+        },
+        {
+          "@id": "concept/rag"
+        }
+      ]
+    },
+    {
+      "@id": "concept/context-window",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Context Window",
+      "schema:description": "The maximum amount of text a language model can process in one call, which limits how much retrieved or grounded content a single query can supply.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/rag"
+        },
+        {
+          "@id": "concept/llm"
+        }
+      ]
+    },
+    {
+      "@id": "concept/llm",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Large Language Model",
+      "schema:description": "A model trained on large volumes of text to predict and generate language; the layer that turns retrieved or grounded facts into a final written answer.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/rag"
+        },
+        {
+          "@id": "concept/context-window"
+        },
+        {
+          "@id": "concept/hallucination"
+        }
+      ]
+    },
+    {
+      "@id": "concept/hallucination",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Hallucination",
+      "schema:description": "A fluent, confident answer that is factually wrong or unsupported by any source, produced when a model fills a gap from learned patterns instead of a verified fact.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/llm"
+        },
+        {
+          "@id": "concept/grounding"
+        }
+      ],
+      "gci:contrastsWith": {
+        "@id": "concept/grounded-abstention"
+      }
+    },
+    {
+      "@id": "concept/rag-limitation",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "RAG Limitation",
+      "schema:description": "A category of question that similarity-based retrieval systematically answers poorly, because it ranks text by resemblance to the question, not by whether it can support the reasoning the question actually requires.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:narrower": [
+        {
+          "@id": "concept/multi-hop-query"
+        },
+        {
+          "@id": "concept/aggregate-query"
+        },
+        {
+          "@id": "concept/source-attribution"
+        },
+        {
+          "@id": "concept/grounded-abstention"
+        }
+      ]
+    },
+    {
+      "@id": "concept/multi-hop-query",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Multi-Hop Query",
+      "schema:description": "A question whose answer requires chaining separate facts across several entities, such as part to supplier to country, where no single retrieved passage holds the full chain.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/rag-limitation"
+        }
+      ],
+      "gci:implementedBy": {
+        "@id": "concept/knowledge-graph"
+      }
+    },
+    {
+      "@id": "concept/aggregate-query",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Aggregate Query",
+      "schema:description": "A question that requires computing over a complete set of records, such as a count or total, which similarity retrieval cannot do because it returns a few look-alike passages, not the whole set.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/rag-limitation"
+        }
+      ],
+      "gci:implementedBy": {
+        "@id": "concept/knowledge-graph"
+      }
+    },
+    {
+      "@id": "concept/source-attribution",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Source Attribution",
+      "schema:description": "Keeping the originating source bound to each individual fact, so that when two documents disagree the conflict stays visible instead of being blended into one smoothed-over answer.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/rag-limitation"
+        }
+      ],
+      "skos:related": [
+        {
+          "@id": "concept/provenance"
+        }
+      ],
+      "gci:implementedBy": {
+        "@id": "concept/knowledge-graph"
+      }
+    },
+    {
+      "@id": "concept/grounded-abstention",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Grounded Abstention",
+      "schema:description": "A system's ability to decline when no sourced fact supports an answer, instead of producing a confident guess.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/rag-limitation"
+        }
+      ],
+      "gci:contrastsWith": {
+        "@id": "concept/hallucination"
+      },
+      "gci:implementedBy": {
+        "@id": "concept/knowledge-graph"
+      }
+    },
+    {
+      "@id": "concept/decision-intelligence",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Decision Intelligence",
+      "schema:description": "Structuring data and rules so a business decision carries a traceable rationale — which fact, which source, which rule — instead of resting on unrecorded judgment.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/knowledge-graph"
+        },
+        {
+          "@id": "concept/compliance-graph"
+        }
+      ]
+    },
+    {
+      "@id": "concept/compliance-graph",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Compliance Graph",
+      "schema:description": "A knowledge graph modeling regulatory obligations, the controls that satisfy them, and the evidence each control was met, so compliance can be demonstrated rather than asserted.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:broader": [
+        {
+          "@id": "concept/knowledge-graph"
+        }
+      ],
+      "skos:related": [
+        {
+          "@id": "concept/data-governance"
+        }
+      ]
+    },
+    {
+      "@id": "concept/data-governance",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Data Governance",
+      "schema:description": "The policies defining who owns, may access, and is accountable for a given piece of data across an organization.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/data-lineage"
+        },
+        {
+          "@id": "concept/provenance"
+        },
+        {
+          "@id": "concept/compliance-graph"
+        }
+      ]
+    },
+    {
+      "@id": "concept/data-lineage",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Data Lineage",
+      "schema:description": "The recorded chain of where a piece of data originated and every transformation applied before it reached its current form.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:related": [
+        {
+          "@id": "concept/provenance"
+        },
+        {
+          "@id": "concept/data-governance"
+        }
+      ]
+    },
+    {
+      "@id": "concept/structured-data",
+      "@type": [
+        "gci:Concept",
+        "schema:DefinedTerm",
+        "skos:Concept"
+      ],
+      "skos:prefLabel": "Structured Data",
+      "schema:description": "Data held in a fixed, machine-readable schema rather than free text, which is what lets a database or an AI system query it reliably instead of interpreting it.",
+      "skos:inScheme": {
+        "@id": "scheme"
+      },
+      "skos:narrower": [
+        {
+          "@id": "concept/knowledge-graph"
+        }
+      ]
+    }
+  ]
+}
